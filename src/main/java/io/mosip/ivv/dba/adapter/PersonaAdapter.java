@@ -1,4 +1,4 @@
-package io.mosip.ivv.dba;
+package io.mosip.ivv.dba.adapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.mosip.ivv.dba.exception.PersonaIdNotFoundException;
 import io.mosip.ivv.dba.exception.PersonaNotFoundException;
+import io.mosip.ivv.dba.service.PersonaService;
 import io.mosip.ivv.dba.utils.Helper;
 import main.java.io.mosip.ivv.core.structures.Persona;
 
@@ -119,6 +120,8 @@ public class PersonaAdapter implements PersonaService {
         return persona;
     }
 
+
+
     public Persona getPersonaByClass(String persona_class) {
         String sqlQuery = "select * from personas where persona_class= '" + persona_class + "' ";
         Persona persona = null;
@@ -152,19 +155,64 @@ public class PersonaAdapter implements PersonaService {
             try {
                 jsonInString = mapper.writeValueAsString(persona);
                 System.out.println(jsonInString);
+                String sqlQuery = "insert into personas(group_name,persona_class,data) values('" + group_name + "','"
+                        + persona_class + "','" + jsonInString + "')";
+                int queryForNonSelect = Helper.queryForNonSelect(sqlQuery, this.host, this.port, this.database, this.user,
+                        this.password, this.ssl);
+                if (queryForNonSelect > 0) {
+                    isSaved = true;
+                }
             } catch (JsonProcessingException e) {
-            }
-            String sqlQuery = "insert into personas(group_name,persona_class,data) values('" + group_name + "','"
-                    + persona_class + "','" + jsonInString + "')";
-            int queryForNonSelect = Helper.queryForNonSelect(sqlQuery, this.host, this.port, this.database, this.user,
-                    this.password, this.ssl);
-            if (queryForNonSelect > 0) {
-                isSaved = true;
+                e.printStackTrace();
             }
         } else {
             throw new RuntimeException("Persona can't be null");
         }
         return isSaved;
+    }
+
+
+    public boolean savePersonas(ArrayList<Persona> listOfPersonas) {
+        boolean isSaved=false;
+        String jsonInString = null;
+        if(!listOfPersonas.isEmpty() && listOfPersonas.size()>0){
+            for (Persona persona:listOfPersonas) {
+                String group_name = persona.group_name;
+                String persona_class = persona.persona_class;
+                ObjectMapper mapper = new ObjectMapper();
+                try {
+                    jsonInString = mapper.writeValueAsString(persona);
+                    System.out.println(jsonInString);
+                    String sqlQuery = "insert into personas(group_name,persona_class,data) values('" + group_name + "','"
+                            + persona_class + "','" + jsonInString + "')";
+                    int queryForNonSelect = Helper.queryForNonSelect(sqlQuery, this.host, this.port, this.database, this.user,
+                            this.password, this.ssl);
+                    if (queryForNonSelect > 0) {
+                        isSaved = true;
+                    }
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else{
+            throw new RuntimeException("size of listOfpersonas  cannot be empty");
+        }
+        return isSaved;
+    }
+
+
+    public void deletePersonas(String personaId) {
+
+        if(personaId!=null && personaId.length()>0){
+            String sqlQuery="delete from personas where id= '" + personaId + "' ";
+            int queryForNonSelect = Helper.queryForNonSelect(sqlQuery, this.host, this.port, this.database, this.user,
+                    this.password, this.ssl);
+            if (queryForNonSelect > 0) {
+                System.out.println("Record with scenarioId   "+personaId +" is deleted  ");
+            }
+        }else{
+            throw new RuntimeException("personaId cannot be Empty!");
+        }
     }
 
 }
