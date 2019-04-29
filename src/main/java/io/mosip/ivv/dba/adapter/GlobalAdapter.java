@@ -81,8 +81,9 @@ public class GlobalAdapter implements GlobalService {
     }
 
     /*
-        This method is used to create List of Global
-        @param globalResult
+        This method is used to create List of Global.
+        @param globalResult.
+        return ArrayList<Global>.
      */
     private static ArrayList<Global> createGlobalList(ArrayList<String> globalResult) {
         ArrayList<Global> globalList = new ArrayList<Global>();
