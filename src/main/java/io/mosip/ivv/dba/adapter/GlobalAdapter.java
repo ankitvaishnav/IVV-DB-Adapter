@@ -80,6 +80,10 @@ public class GlobalAdapter implements GlobalService {
         return isRecordDeleted;
     }
 
+    /*
+        This method is used to create List of Global
+        @param globalResult
+     */
     private static ArrayList<Global> createGlobalList(ArrayList<String> globalResult) {
         ArrayList<Global> globalList = new ArrayList<Global>();
         Global global = null;
