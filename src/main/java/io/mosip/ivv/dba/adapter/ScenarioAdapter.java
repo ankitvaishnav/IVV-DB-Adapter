@@ -154,6 +154,8 @@ public class ScenarioAdapter implements ScenarioService {
                     this.password, this.ssl);
             if (queryForNonSelect > 0) {
                System.out.println("Record with scenarioId   "+scenarioId +" is deleted  ");
+            }else{
+               throw new ScenarioNotFoundException("No scenario found with  Id "+scenarioId);
             }
         }else{
             throw new RuntimeException("scenarioId cannot be Empty!");
