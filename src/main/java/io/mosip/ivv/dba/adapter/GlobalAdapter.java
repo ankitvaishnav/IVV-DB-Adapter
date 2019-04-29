@@ -1,6 +1,7 @@
 package io.mosip.ivv.dba.adapter;
 
 import io.mosip.ivv.dba.domain.Global;
+import io.mosip.ivv.dba.exception.GlobalIdNotFound;
 import io.mosip.ivv.dba.service.GlobalService;
 import io.mosip.ivv.dba.utils.Helper;
 
@@ -75,7 +76,7 @@ public class GlobalAdapter implements GlobalService {
             isRecordDeleted = Helper.queryForNonSelect(sqlQuery, this.host, this.port, this.database, this.user,
                     this.password, this.ssl);
         }else{
-            throw new RuntimeException("globalId cannot be Empty!");
+            throw new GlobalIdNotFound("globalId cannot be Empty!");
         }
         return isRecordDeleted;
     }
