@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.github.ankitvaishnav</groupId>
             <artifactId>IVV-Core</artifactId>
-            <version>610aaaa976</version>
+            <version>597d6c9940</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>

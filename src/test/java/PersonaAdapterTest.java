@@ -80,16 +80,16 @@ public class PersonaAdapterTest {
 
     private static Persona cratePersona(String group_name,String persona_class,String person_city,String person_cnie_number){
         Persona persona = new Persona();
-        persona.group_name=group_name;
-        persona.persona_class=persona_class;
+        persona.setGroupName(group_name);
+        persona.setPersonaClass(persona_class);
         persona.addPerson(createPerson(person_city,person_cnie_number));
         return persona;
     }
 
     private static Person createPerson(String city,String cnie_number){
         Person person= new Person();
-        person.city=city;
-        person.cnie_number=cnie_number;
+        person.setCity(city);
+        person.setCnieNumber(cnie_number);
         return person;
     }
 

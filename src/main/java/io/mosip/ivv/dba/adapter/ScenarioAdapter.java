@@ -40,8 +40,8 @@ public class ScenarioAdapter implements ScenarioService {
         boolean isSaved = false;
         String jsonInString = null;
         if (scenario != null) {
-            String tc_no = scenario.tag;
-            String group_name = scenario.group_name;
+            String tc_no = scenario.getName();
+            String group_name = scenario.getGroupName();
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 jsonInString = mapper.writeValueAsString(scenario);
@@ -123,8 +123,8 @@ public class ScenarioAdapter implements ScenarioService {
         String jsonInString = null;
         if(!listOfScenarios.isEmpty()){
             for (Scenario scenario:listOfScenarios) {
-                String group_name=scenario.group_name;
-                String tc_no=scenario.tag;
+                String group_name=scenario.getGroupName();
+                String tc_no=scenario.getName();
                 try {
                     ObjectMapper mapper = new ObjectMapper();
                     jsonInString = mapper.writeValueAsString(scenario);

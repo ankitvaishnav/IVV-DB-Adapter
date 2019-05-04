@@ -3,8 +3,6 @@ package io.mosip.ivv.dba.adapter;
 import io.mosip.ivv.dba.domain.Config;
 import io.mosip.ivv.dba.service.ConfigService;
 import io.mosip.ivv.dba.utils.Helper;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 
 import java.util.*;
 

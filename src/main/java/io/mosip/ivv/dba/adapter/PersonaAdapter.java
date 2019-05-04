@@ -149,8 +149,8 @@ public class PersonaAdapter implements PersonaService {
         boolean isSaved = false;
         if (persona != null) {
             String jsonInString = null;
-            String group_name = persona.group_name;
-            String persona_class = persona.persona_class;
+            String group_name = persona.getGroupName();
+            String persona_class = persona.getPersonaClass();
             ObjectMapper mapper = new ObjectMapper();
             try {
                 jsonInString = mapper.writeValueAsString(persona);
@@ -177,8 +177,8 @@ public class PersonaAdapter implements PersonaService {
         String jsonInString = null;
         if(!listOfPersonas.isEmpty() && listOfPersonas.size()>0){
             for (Persona persona:listOfPersonas) {
-                String group_name = persona.group_name;
-                String persona_class = persona.persona_class;
+                String group_name = persona.getGroupName();
+                String persona_class = persona.getPersonaClass();
                 ObjectMapper mapper = new ObjectMapper();
                 try {
                     jsonInString = mapper.writeValueAsString(persona);
